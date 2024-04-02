@@ -1,12 +1,31 @@
-from rest_framework import viewsets
-from .models import Organizator
-from .serializers import OrganizatorSerializer
-from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Q
+from rest_framework import viewsets, filters
+from .models import Organizator, Teacher
+from .serializers import OrganizatorSerializer, TeacherSerializer
+
+
+class OrganizatorStyleFilterBackend(filters.BaseFilterBackend):
+    """
+    Filter that only allows users to see their own objects.
+    """
+    def filter_queryset(self, request, queryset, view):
+        if request.query_params.get("style_id"):
+            return queryset.filter(
+                Q(teacher__teacherstyle__style_id=request.query_params["style_id"]) |
+                Q(company__companystyle__style_id=request.query_params["style_id"])
+            )
+        return queryset
+
 
 class OrganizatorViewSet(viewsets.ModelViewSet):
     model = Organizator
-    filter_backends = [DjangoFilterBackend]
-    queryset = Organizator.objects.all()
+    queryset = Organizator.objects.all().select_related('company', 'teacher')
     serializer_class = OrganizatorSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['teacher__teacher_styles__style_id']
+    filter_backends = [OrganizatorStyleFilterBackend]
+    filterset_fields = ['style_id']
+
+
+class TeacherViewSet(viewsets.ModelViewSet):
+    model = Teacher
+    queryset = Teacher.objects.all().prefetch_related("teacherstyle_set")
+    serializer_class = TeacherSerializer

@@ -85,4 +85,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.email
 
-
+    @property
+    def profile_photo(self):
+        return self.photo or self.photo.url

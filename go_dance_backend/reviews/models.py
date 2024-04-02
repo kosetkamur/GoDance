@@ -13,7 +13,7 @@ class Review(models.Model):
 
     author = models.CharField(max_length=255)
     date = models.DateField()
-    rating = models.DecimalField(max_digits=5, decimal_places=2)
+    rating = models.FloatField(default=0.0)
     body = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     organizator = models.ForeignKey(Organizator, on_delete=models.CASCADE)

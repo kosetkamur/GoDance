@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'go_dance_backend.bookings',
     'go_dance_backend.styles',
     'go_dance_backend.organizators',
     'go_dance_backend.courses',

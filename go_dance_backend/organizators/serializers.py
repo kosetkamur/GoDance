@@ -18,6 +18,7 @@ class TeacherStyleSerializer(serializers.ModelSerializer):
         model = TeacherStyle
         fields = ["id", "style"]
 
+
 class TeacherSerializer(serializers.ModelSerializer):
     styles = TeacherStyleSerializer(many=True, read_only=True, source="teacherstyle_set")
 

@@ -1,7 +1,8 @@
 from django.db import models
 
-from go_dance_backend.organizators.models import Teacher
+from go_dance_backend.organizators.models import Teacher, Organizator
 from go_dance_backend.styles.models import Style
+
 
 class Event(models.Model):
 
@@ -26,3 +27,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class OrganizatorEvent(models.Model):
+    class Meta:
+        verbose_name = "Мероприятие организатора"
+        verbose_name_plural = "Мероприятия организаторов"
+
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    organizator = models.ForeignKey(Organizator, on_delete=models.CASCADE)

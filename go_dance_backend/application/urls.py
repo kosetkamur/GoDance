@@ -27,6 +27,7 @@ urlpatterns = [
             path('', include('go_dance_backend.courses.urls')),
             path('', include('go_dance_backend.reviews.urls')),
             path('', include('go_dance_backend.user.urls')),
+            path('booking/', include('go_dance_backend.bookings.urls')),
         ]
     )),
 ]

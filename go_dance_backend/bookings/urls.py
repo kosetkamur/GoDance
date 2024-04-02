@@ -1,3 +1,9 @@
-from django.test import TestCase
+from django.urls import path
 
-# Create your tests here.
+from go_dance_backend.bookings.views import GetSeancesList, CreateBookingView, CreateCourseBookingView
+
+urlpatterns = [
+    path("seance", CreateBookingView.as_view()),
+    path("course", CreateCourseBookingView.as_view()),
+    path('seances', GetSeancesList.as_view()),
+]

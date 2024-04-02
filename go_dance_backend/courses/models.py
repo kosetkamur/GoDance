@@ -22,7 +22,6 @@ class Course(models.Model):
     style = models.ForeignKey(Style, on_delete=models.CASCADE)
     image = models.FileField(upload_to='data_images/')
     master_class = models.BooleanField()
-    count_people = models.IntegerField()
 
     def __str__(self):
         return self.name
