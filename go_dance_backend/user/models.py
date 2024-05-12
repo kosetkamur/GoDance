@@ -57,6 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     password = models.CharField(max_length=255)
+    organizator = models.ForeignKey("organizators.Organizator", null=True, on_delete=models.CASCADE)
 
     is_staff = models.BooleanField(
         _("staff status"),

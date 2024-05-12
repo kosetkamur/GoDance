@@ -1,7 +1,7 @@
 from django.db.models import Q
 from rest_framework import viewsets, filters
 from .models import Event
-from .serializers import EventSerializer
+from ..organizators.serializers import EventSerializer
 
 
 class EventStyleFilterBackend(filters.BaseFilterBackend):

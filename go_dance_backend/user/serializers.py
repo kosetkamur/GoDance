@@ -20,13 +20,18 @@ class UserCourseBookingSerializer(serializers.ModelSerializer):
         ]
 
 
+class SimpleOrganizatorSerializer(serializers.Serializer):
+    teacher_id = serializers.IntegerField(allow_null=True)
+    company_id = serializers.IntegerField(allow_null=True)
+
 class UserCurrentSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'birthdate', 'phone', 'email', 'master_classes', 'course_bookings']
+        fields = ['id', 'first_name', 'birthdate', 'phone', 'email', 'master_classes', 'course_bookings', 'organizator_info']
 
     master_classes = BookingSerializer(many=True, read_only=True)
     course_bookings = UserCourseBookingSerializer(many=True, read_only=True)
+    organizator_info = SimpleOrganizatorSerializer(read_only=True, source="organizator")
 
 
 class UserSerializer(serializers.ModelSerializer):

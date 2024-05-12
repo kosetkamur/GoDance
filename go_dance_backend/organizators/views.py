@@ -1,7 +1,7 @@
 from django.db.models import Q
 from rest_framework import viewsets, filters
 from .models import Organizator, Teacher
-from .serializers import OrganizatorSerializer, TeacherSerializer
+
 
 
 class OrganizatorStyleFilterBackend(filters.BaseFilterBackend):
@@ -18,6 +18,7 @@ class OrganizatorStyleFilterBackend(filters.BaseFilterBackend):
 
 
 class OrganizatorViewSet(viewsets.ModelViewSet):
+    from .serializers import OrganizatorSerializer
     model = Organizator
     queryset = Organizator.objects.all().select_related('company', 'teacher')
     serializer_class = OrganizatorSerializer
@@ -26,6 +27,7 @@ class OrganizatorViewSet(viewsets.ModelViewSet):
 
 
 class TeacherViewSet(viewsets.ModelViewSet):
+    from .serializers import TeacherSerializer
     model = Teacher
     queryset = Teacher.objects.all().prefetch_related("teacherstyle_set")
     serializer_class = TeacherSerializer

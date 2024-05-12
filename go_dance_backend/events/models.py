@@ -14,7 +14,7 @@ class Event(models.Model):
     type = models.CharField(max_length=255)
     description = models.TextField()
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    duration = models.DurationField()
+    duration = models.CharField(max_length=255, verbose_name="Длительность мероприятия")
     date = models.DateField()
     address = models.CharField(max_length=255)
     count_people = models.IntegerField()
